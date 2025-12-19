@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FittingWidget</class>
+ <widget class="QWidget" name="FittingWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1100</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Fitting Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* 全局设置 */
+QWidget {
+    color: #000000;
+    font-family: &quot;Microsoft YaHei&quot;, &quot;Segoe UI&quot;, sans-serif;
+    font-size: 9pt;
+}
+
+/* 分割条样式：纯白无边框 */
+QSplitter::handle {
+    background-color: white;
+    border: 0px solid white;
+    width: 5px;
+}
+
+/* 分组框样式 */
+QGroupBox {
+    border: 1px solid #b0b0b0;
+    border-radius: 4px;
+    margin-top: 2.5ex;
+    font-weight: bold;
+    color: #000000;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 10px;
+    padding: 0 5px;
+    color: #000000;
+}
+
+/* 按钮样式 */
+QPushButton {
+    background-color: #ffffff;
+    border: 1px solid #c0c0c0;
+    border-radius: 4px;
+    padding: 6px 12px;
+    color: #333333;
+}
+QPushButton:hover {
+    background-color: #f2f2f2;
+    border-color: #a0a0a0;
+    color: #000000;
+}
+QPushButton:pressed {
+    background-color: #e0e0e0;
+    border-color: #808080;
+}
+QPushButton:disabled {
+    background-color: #f9f9f9;
+    color: #a0a0a0;
+    border-color: #e0e0e0;
+}
+
+/* 表格样式 */
+QTableWidget {
+    gridline-color: #d0d0d0;
+    selection-background-color: #e0ebf5;
+    selection-color: #000000;
+    border: 1px solid #c0c0c0;
+}
+QHeaderView::section {
+    background-color: #f0f0f0;
+    padding: 4px;
+    border: 1px solid #d0d0d0;
+    color: #000000;
+}
+
+/* 输入框样式 */
+QLineEdit, QDoubleSpinBox, QSpinBox, QComboBox {
+    border: 1px solid #c0c0c0;
+    border-radius: 2px;
+    padding: 3px;
+    background-color: #ffffff;
+    color: #000000;
+}
+QComboBox::drop-down {
+    border-left: 1px solid #c0c0c0;
+    width: 20px;
+    background: #f0f0f0;
+}
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QWidget" name="leftPanel" native="true">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>5</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="groupBox_Data">
+         <property name="title">
+          <string>1. 数据加载与模型选择</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QPushButton" name="btnLoadData">
+            <property name="text">
+             <string>加载观测数据...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QPushButton" name="btn_modelSelect">
+            <property name="text">
+             <string>当前: 压裂水平井复合页岩油模型1</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_Params">
+         <property name="title">
+          <string>2. 拟合参数设置</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QTableWidget" name="tableParams">
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+            <property name="columnCount">
+             <number>6</number>
+            </property>
+            <column>
+             <property name="text">
+              <string>参数名</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>当前值</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>拟合?</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>下限</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>上限</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>单位</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QPushButton" name="btnResetParams">
+              <property name="text">
+               <string>重置参数</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnImportModel">
+              <property name="text">
+               <string>刷新曲线</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_Control">
+         <property name="title">
+          <string>3. 自动拟合控制</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_Slider">
+            <item>
+             <widget class="QLabel" name="label_ValDerivative">
+              <property name="text">
+               <string>导数权重: 0.5</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="sliderWeight">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+              <property name="value">
+               <number>50</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_ValPressure">
+              <property name="text">
+               <string>压力权重: 0.5</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QPushButton" name="btnRunFit">
+              <property name="text">
+               <string>开始自动拟合</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnStop">
+              <property name="text">
+               <string>停止</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QProgressBar" name="progressBar">
+            <property name="value">
+             <number>0</number>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="textVisible">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_Error">
+            <property name="text">
+             <string>误差(MSE): N/A</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_Export">
+         <property name="title">
+          <string>4. 结果输出</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_Export">
+          <item row="0" column="0">
+           <widget class="QPushButton" name="btnExportData">
+            <property name="text">
+             <string>导出数据</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QPushButton" name="btnExportChart">
+            <property name="text">
+             <string>导出图片</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="btnSaveFit">
+            <property name="text">
+             <string>保存状态</string>
+            </property>
+            <property name="toolTip">
+             <string>保存当前拟合结果到项目文件</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="btnExportReport">
+            <property name="text">
+             <string>导出报告</string>
+            </property>
+            <property name="toolTip">
+             <string>生成Word格式的试井解释报告</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="rightPanel" native="true">
+      <layout class="QVBoxLayout" name="verticalLayout_Plot">
+       <property name="leftMargin">
+        <number>5</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_Tools">
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnResetView">
+           <property name="text">
+            <string>重置视角</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnChartSettings">
+           <property name="text">
+            <string>图表设置</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QWidget" name="plotContainer" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: white; border: 1px solid #c0c0c0;</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5"/>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
